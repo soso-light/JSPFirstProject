@@ -5,8 +5,10 @@
   Time: 오후 11:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%
+    request.setCharacterEncoding("utf-8");
+
     String name = request.getParameter("name");
     String nickname = request.getParameter("nickname");
     String major = request.getParameter("major");
@@ -18,7 +20,23 @@
     if(check.equals("1")) check = "공개";
     String favor = request.getParameter("major");
     String[] genre = request.getParameterValues("genre");
+    String genreStr = "";
+    if(genre != null)
+    {
+        for(String temp : genre)
+        {
+            genreStr += "- " + temp + "\n";
+        }
+    }
     String[] playlist = request.getParameterValues("playlist");
+    String playlistStr = "";
+    if(playlist != null)
+    {
+        for(String temp : playlist)
+        {
+            playlistStr += "- " + temp + "\n";
+        }
+    }
     String singer = request.getParameter("singer");
     String song = request.getParameter("song");
 
@@ -81,12 +99,12 @@
             <!-- 장르 -->
             <div class="col-md-4">
                 <h3 class="form-label">장르</h3>
-                <p class="form-select"><%= genre %></p>
+                <p class="form-select"><%= genreStr %></p>
             </div>
             <!-- 플레이리스트 선택 -->
             <div class="col-md-5">
                 <h3 class="form-label">플레이리스트 선택</h3>
-                <p class="form-select"><%= playlist %></p>
+                <p class="form-select"><%= playlistStr %></p>
             </div>
 
             <hr class="my-4">
